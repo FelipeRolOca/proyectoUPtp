@@ -26,7 +26,8 @@ mongoose
   .catch((err) => console.log(err))
 
   app.use(express.json());
-  
+
+
   
   app.get("/", (req, res) => {
     //res.send("Hola estoy funcionando.");
@@ -72,8 +73,40 @@ mongoose
       }
   
   });
+
+  app.get("/users/:id",async (req,res) =>{
   
+    let userId =  req.params.id;
+
+    try{
+
+      user = await UsrController.getUser(userId);
+
+      res.status(200).json(user);
+
+    }catch(error){
+      res.status(500).send("Error");
+    }
+
+});
   
+//obtener peluches
+app.get("/users/:id/peluches",async (req,res) =>{
+  
+  let userId =  req.params.id;
+
+  try{
+
+    peluches = await UsrController.getAllUsersPeluches(userId);
+
+    res.status(200).json(peluches);
+
+  }catch(error){
+    res.status(500).send("Error");
+  }
+
+});
+
 
 
 
@@ -162,22 +195,48 @@ app.post("/auth/login", async (req,res) => {
   }  
 })
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* Manda un mail */
 //MailController.sendMail();
 
 
+
+
+
+
 // peluche 
 // Creo un nuevo peluche
-app.post("/peluches",async (req,res) =>{
+app.post("/peluches/:idusuario/create",async (req,res) =>{
   
   let nombre = req.body.nombre;
   let animal = req.body.animal;
   let color = req.body.color;
   let accesorio = req.body.accesorio;
+  let propietario = req.params.idusuario;
+  const user = { _id: req.params.id, ...req.body };
+  
+
   
   try{
-    const result = await PelController.addPeluche(nombre,animal,color,accesorio);
+    const result = await PelController.addPeluche(nombre,animal,color,accesorio,propietario);
+    
     if(result){
+    
       res.status(201).send("peluche  creado correctamente"); // 201
     }else{
       res.status(409).send("El peluche ya existe"); // 409
@@ -188,6 +247,8 @@ app.post("/peluches",async (req,res) =>{
   }  
   
 });
+
+
 //editar peluche
 app.put("/peluches/:id",async (req,res) =>{
 
@@ -204,6 +265,7 @@ app.put("/peluches/:id",async (req,res) =>{
   }catch(error){  
      res.status(500).send("Error");
   } 
+  
   // borrar 
 
   app.delete("/peluches/:id", async(req,res) =>{
@@ -223,6 +285,7 @@ app.put("/peluches/:id",async (req,res) =>{
   });
 
 });
+
 app.get("/peluches",async (req,res) =>{
   
   let limit = 5 ;

@@ -3,7 +3,7 @@ const Pel = require('../models/peluche');
 
 
 
-const addPeluche = async (nombre,animal,color,accesorio) => {
+const addPeluche = async (nombre,animal,color,accesorio,propietario) => {
 
     // let existPeluche = await Pel.findOne({ nombre: nombre });
     // console.log(existPeluche);
@@ -14,7 +14,8 @@ const addPeluche = async (nombre,animal,color,accesorio) => {
                 animal:animal,
                 color:color,
                 accesorio:accesorio,
-                nombre:nombre
+                nombre:nombre,
+                propietario:propietario
             }
         );
 

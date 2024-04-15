@@ -17,6 +17,11 @@ const pelSchema = new Schema({
 	accesorio:{
 		type: String,
 		required:true
+	},
+
+	propietario:{
+		type: Schema.Types.ObjectId,
+		ref: "user"
 	}
 	
 }, { timestamps: true } ).set('toJSON',{

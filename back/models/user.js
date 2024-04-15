@@ -24,12 +24,13 @@ const usrSchema = new Schema({
 		required:true
 	},
 
-	muneco:{
-		type: Array,
-		required: false,
-		default: [null]
+	peluches:[
+		{
+		type: Schema.Types.ObjectId,
+		ref: "peluche"
 
-	}
+	    }
+    ]
 	
 }, { timestamps: true } ).set('toJSON',{
     transform: (document, object) => {
@@ -40,5 +41,5 @@ const usrSchema = new Schema({
 });
 
 
-const Usr = mongoose.model('usr',usrSchema);
+const Usr = mongoose.model('user',usrSchema);
 module.exports = Usr;
