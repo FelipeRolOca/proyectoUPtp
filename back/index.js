@@ -11,7 +11,6 @@ const mongoose = require("mongoose");
 const UsrController = require('./controllers/user');
 const AuthController = require('./controllers/user');
 const Middleware = require('./middleware/auth-middleware');
-const MailController = require('./controllers/mail');
 const PelController = require('./controllers/peluche')
 
 // Create a MongoClient with a MongoClientOptions object to set the Stable API version
@@ -202,17 +201,6 @@ app.post("/auth/login", async (req,res) => {
 
 
 
-
-
-
-
-
-
-
-
-
-/* Manda un mail */
-//MailController.sendMail();
 
 
 
