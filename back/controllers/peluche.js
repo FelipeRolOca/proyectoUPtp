@@ -36,6 +36,12 @@ const getAllPeluches = async (limit,offset) => {
 
     return peluches;
 }
+const getAllPeluchesuser = async (limit,offset,iduser) => {
+
+    const peluches = await Pel.find({propietario: iduser}).limit(limit).skip(offset);
+
+    return peluches;
+}
 
 const getpeluche = async(id) => {
 
@@ -60,4 +66,4 @@ const deletePeluche = async(id) => {
     return result;
 }
 
-module.exports = { addPeluche, getAllPeluches, getpeluche, editPeluche, deletePeluche} 
+module.exports = { addPeluche, getAllPeluches, getpeluche, editPeluche, deletePeluche,getAllPeluchesuser} 

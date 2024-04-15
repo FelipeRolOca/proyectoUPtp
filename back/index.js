@@ -91,28 +91,23 @@ mongoose
   
 //obtener peluches
 app.get("/users/:id/peluches",async (req,res) =>{
-  
+  let limit = req.query.limit;
+  let offset = req.query.offset;
   let userId =  req.params.id;
 
   try{
 
-    peluches = await UsrController.getAllUsersPeluches(userId);
+    peluches = await PelController.getAllPeluchesuser(limit,offset,userId);
 
     res.status(200).json(peluches);
 
   }catch(error){
+    console.log(error);
     res.status(500).send("Error");
+   
   }
 
 });
-
-
-
-
-
-
-
-
 
 
 
@@ -177,7 +172,7 @@ app.delete("/users/:id", async(req,res) =>{
   }
 });
 
-
+//autentifico usuario
 app.post("/auth/login", async (req,res) => {
 
   const email = req.body.email;
@@ -194,32 +189,15 @@ app.post("/auth/login", async (req,res) => {
   }  
 })
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 // peluche 
 // Creo un nuevo peluche
 app.post("/peluches/:idusuario/create",async (req,res) =>{
-  
   let nombre = req.body.nombre;
   let animal = req.body.animal;
   let color = req.body.color;
   let accesorio = req.body.accesorio;
   let propietario = req.params.idusuario;
   const user = { _id: req.params.id, ...req.body };
-  
-
-  
   try{
     const result = await PelController.addPeluche(nombre,animal,color,accesorio,propietario);
     
@@ -239,11 +217,8 @@ app.post("/peluches/:idusuario/create",async (req,res) =>{
 
 //editar peluche
 app.put("/peluches/:id",async (req,res) =>{
-
   const peluche = { _id: req.params.id, nombre: req.body.nombre, animal: req.body.animal,color: req.body.color, accesorio: req.body.accesorio  };
-  
   try{
-    
     const result = await PelController.editPeluche(peluche);
     if(result){
       res.status(200).json(result);
@@ -255,7 +230,6 @@ app.put("/peluches/:id",async (req,res) =>{
   } 
   
   // borrar 
-
   app.delete("/peluches/:id", async(req,res) =>{
 
     try{
