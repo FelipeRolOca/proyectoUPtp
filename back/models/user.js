@@ -23,7 +23,8 @@ const usrSchema = new Schema({
 		type: String,
 		required:true
 	},
-
+	
+	// aun no funcional
 	peluches:[
 		{
 		type: Schema.Types.ObjectId,
