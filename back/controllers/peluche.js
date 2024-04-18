@@ -31,12 +31,15 @@ const getAllPeluches = async (limit,offset) => {
 
     return peluches;
 }
+
+
 const getAllPeluchesuser = async (limit,offset,iduser) => {
 
     const peluches = await Pel.find({propietario: iduser}).limit(limit).skip(offset);
 
     return peluches;
 }
+
 
 const getpeluche = async(id) => {
 
@@ -45,6 +48,7 @@ const getpeluche = async(id) => {
     return peluche;
 }
 
+
 const editPeluche = async(peluche) => {
 
     const result = await Pel.findByIdAndUpdate(peluche._id,peluche,{new:true});
@@ -52,11 +56,13 @@ const editPeluche = async(peluche) => {
     return result;
 }
 
+
 const deletePeluche = async(id) => {
 
     const result = await Pel.findByIdAndDelete(id);
 
     return result;
 }
+
 
 module.exports = { addPeluche, getAllPeluches, getpeluche, editPeluche, deletePeluche,getAllPeluchesuser} 

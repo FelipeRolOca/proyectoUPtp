@@ -20,7 +20,7 @@ const addUser = async (name,lastname,email,isActive,password) => {
                 email: email,
                 isActive:isActive,
                 password:cryptoPass,
-                peluches:peluches
+                
             }
         );
 
@@ -63,18 +63,5 @@ const deleteUser = async(id) => {
     return result;
 }
 
-const getAllUsersPeluches = async (id) => {
-    
-    const founduser = await Usr.findById(id).populate("peluches");
-    return founduser;
 
-}
-
-const agregarpel = async(user) => {
-
-    const result = await Usr.findByIdAndUpdate(user._id,user,{new:true}).populate("peluches");
-
-    return result;
-}
-
-module.exports = { addUser, getAllUsers, getUser, editUser, deleteUser,getAllUsersPeluches,agregarpel }
+module.exports = { addUser, getAllUsers, getUser, editUser, deleteUser }

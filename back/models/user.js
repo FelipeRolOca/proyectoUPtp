@@ -24,14 +24,6 @@ const usrSchema = new Schema({
 		required:true
 	},
 	
-	// aun no funcional
-	peluches:[
-		{
-		type: Schema.Types.ObjectId,
-		ref: "peluche"
-
-	    }
-    ]
 	
 }, { timestamps: true } ).set('toJSON',{
     transform: (document, object) => {
