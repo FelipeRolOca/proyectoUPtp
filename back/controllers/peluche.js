@@ -5,9 +5,6 @@ const Pel = require('../models/peluche');
 
 const addPeluche = async (nombre,animal,color,accesorio,propietario) => {
 
-    // let existPeluche = await Pel.findOne({ nombre: nombre });
-    // console.log(existPeluche);
-    //if(!existPeluche) {
 
         const pel = new Pel(
             {              
@@ -24,9 +21,7 @@ const addPeluche = async (nombre,animal,color,accesorio,propietario) => {
         console.log(peluche);
         return { peluche }; 
 
-    //}else{
-    //    return false;
-    //}
+ 
 }   
 
 
@@ -46,8 +41,6 @@ const getAllPeluchesuser = async (limit,offset,iduser) => {
 const getpeluche = async(id) => {
 
     const peluche = await Pel.findById(id);
-
-    // await Usr.findOne({ _id: req.params.id })
 
     return peluche;
 }

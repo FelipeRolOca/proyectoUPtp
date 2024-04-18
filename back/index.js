@@ -8,8 +8,9 @@ require ('dotenv').config();
 const PORT = process.env.PORT;
 const mongoose = require("mongoose");
 
+
 const UsrController = require('./controllers/user');
-const AuthController = require('./controllers/user');
+const AuthController = require('./controllers/auth');
 const Middleware = require('./middleware/auth-middleware');
 const PelController = require('./controllers/peluche')
 
@@ -29,10 +30,10 @@ mongoose
 
   
   app.get("/", (req, res) => {
-    //res.send("Hola estoy funcionando.");
     res.status(200).json("Hola estoy funcionando.");
   });
   
+
   // GET - POST - DELETE - PUT - PATCH 
   
   app.post("/",(req,res) => {
@@ -262,6 +263,35 @@ app.get("/peluches",async (req,res) =>{
   }
 
 });
+
+//autentificacion 
+app.post("/autentificacion", async (req, res) => {
+  let password = req.body.password;
+  let email = req.body.email;
+
+  try {
+      // Llamar a la función de autenticación
+      const token = await AuthController.login(email, password);
+
+      // Verificar si se obtuvo un token JWT
+      if (token) {
+          console.log('Autenticación exitosa. Token JWT:', token);
+          res.status(200).json(token);
+          // Aquí puedes realizar otras acciones, como enviar el token al cliente, establecer una sesión, etc.
+      } else {
+          console.log('Credenciales inválidas. No se pudo autenticar.');
+          res.status(500).send("Error. Intente mas tarde.")
+      }
+  } catch (error) {
+      console.error('Error en la autenticación:', error);
+      res.status(500).send("Error. Intente mas tarde.")
+  }
+});
+
+
+
+
+
 
 app.listen(PORT, () => {
   console.log(`Servidor levantado ${PORT}`)
