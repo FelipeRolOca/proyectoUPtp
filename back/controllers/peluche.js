@@ -64,5 +64,27 @@ const deletePeluche = async(id) => {
     return result;
 }
 
+const getpeluchesmasvendidos = async (
+    limit = 3,
+    page = 1
+) => {
+    const result = await Pel.aggregate()
+      .group({
+        _id: {
+          animal: '$animal',
+          color: '$color',
+          accesorio: '$accesorio',
+        },
+        total: {  $sum: 1  },
+      })
+      .sort({ total: - 1 })
+      .limit(limit)
+      .skip(limit * (page - 1))
+      .exec();
 
-module.exports = { addPeluche, getAllPeluches, getpeluche, editPeluche, deletePeluche,getAllPeluchesuser} 
+      return result
+    };
+
+
+
+module.exports = { addPeluche, getAllPeluches, getpeluche, editPeluche, deletePeluche,getAllPeluchesuser,getpeluchesmasvendidos} 

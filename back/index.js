@@ -236,7 +236,7 @@ app.put("/peluches/:id",async (req,res) =>{
 
 app.get("/peluches",async (req,res) =>{
   
-  let limit = 5 ;
+  let limit = req.query.limit ;
   let offset = req.query.offset;
 
   try{
@@ -272,6 +272,21 @@ app.post("/autentificacion", async (req, res) => {
       res.status(500).send("Error. Intente mas tarde.")
   }
 });
+
+app.get("/peluchesmasvendidos", async(req, res) => {
+  try{
+    const result = await PelController.getpeluchesmasvendidos();
+    console.log(result)
+    res.status(200).json(result);
+
+  }catch(error){
+      res.status(500).send("Error. Intente mas tarde.")
+      console.log(error);
+  }
+
+});
+  
+
 
 
 
