@@ -140,8 +140,8 @@ app.post("/users",async (req,res) =>{
 // Modifico un usuario
 app.put("/users/:id",async (req,res) =>{
 
-  const user = { _id: req.params.id, ...req.body };
-  //             {_id: req.params.id, name: req.body.name, lastname, email }
+  const user = { _id: req.params.id, name: req.body.name, lastname: req.body.lastname,email: req.body.email, isActive: req.body.isActive,password: req.body.password };
+  
   try{
     
     const result = await UsrController.editUser(user);
