@@ -14,6 +14,10 @@ para mosterar todos los peluches de un usuario
 get -- localhost:8080/users/iduser/peluches
 para generar un token se debe ingresar el password y el email
 post -- localhost:8080/autentificacion
+{
+    "password" : "15e2b0d3c33891ebb0f1ef609ec419420c20e320ce94c65fbc8c3312448eb225",
+    "email" : "emailfalso@hotamil"
+}
 mostrar los peluches mas vendidos
 get -- localhost:8080/peluchesmasvendidos
 modificar peluches 
