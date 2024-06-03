@@ -32,3 +32,4 @@ Tenes que realizar el npm install con las sigueintes cosas :
     "moment"
     "mongoose"
     "nodemailer"
+    npm install cors
