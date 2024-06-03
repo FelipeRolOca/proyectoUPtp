@@ -48,6 +48,17 @@ const getUser = async(id) => {
 
     return user;
 }
+const getUserid = async(email,password) => {
+    try {
+    const user = await Usr.findOne({ email, password }).exec();
+    return user;
+    }
+ catch (error) {
+    console.error('Error al buscar el usuario:', error);
+    throw error; // Propagar el error hacia arriba para que pueda ser manejado en otro lugar
+}
+}
+
 
 const editUser = async(user) => {
 
@@ -64,4 +75,4 @@ const deleteUser = async(id) => {
 }
 
 
-module.exports = { addUser, getAllUsers, getUser, editUser, deleteUser }
+module.exports = { addUser, getAllUsers, getUser, editUser, deleteUser,getUserid }

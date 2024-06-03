@@ -7,7 +7,10 @@ const http = require ("http").createServer(app);
 require ('dotenv').config();
 const PORT = process.env.PORT;
 const mongoose = require("mongoose");
+const cors = require('cors');
 
+
+app.use(cors());
 
 const UsrController = require('./controllers/user');
 const AuthController = require('./controllers/auth');
@@ -74,24 +77,28 @@ mongoose
   
   });
 
-  app.get("/users/:id",async (req,res) =>{
   
-    let userId =  req.params.id;
+
+  app.post("/usersid",async (req,res) =>{
+  
+    let email = req.body.email;
+    let password = req.body.password;
 
     try{
 
-      user = await UsrController.getUser(userId);
+      user = await UsrController.getUserid(email,password);
 
       res.status(200).json(user);
 
     }catch(error){
       res.status(500).send("Error");
+      console.log(error);
     }
 
 });
   
 //obtener peluches
-app.get("/users/:id/peluches",async (req,res) =>{
+app.get("/users/:id/peluches",Middleware.verify,async (req,res) =>{
   let limit = req.query.limit;
   let offset = req.query.offset;
   let userId =  req.params.id;
@@ -174,10 +181,9 @@ app.delete("/users/:id", async(req,res) =>{
 });
 
 
-
 // peluche 
 // Creo un nuevo peluche
-app.post("/peluches/:idusuario/create",async (req,res) =>{
+app.post("/peluches/:idusuario/create",Middleware.verify,async (req,res) =>{
   let nombre = req.body.nombre;
   let animal = req.body.animal;
   let color = req.body.color;
@@ -202,7 +208,7 @@ app.post("/peluches/:idusuario/create",async (req,res) =>{
 
 
 //editar peluche
-app.put("/peluches/:id",async (req,res) =>{
+app.put("/peluches/:id",Middleware.verify,async (req,res) =>{
   const peluche = { _id: req.params.id, nombre: req.body.nombre, animal: req.body.animal,color: req.body.color, accesorio: req.body.accesorio  };
   try{
     const result = await PelController.editPeluche(peluche);
