@@ -211,18 +211,20 @@ document.getElementById('enviarinfo').addEventListener('click', function() {
         console.log(data);
 
     })
+    location.reload();
 });
 
 }
 
 //index
+
 const contenedor = document.getElementById("contenedor");
 if(contenedor){
     
 fetch('http://localhost:8080/peluchesmasvendidos')
-    .then(response => response.json())  // convertir a json
-    .then(json => mostrarDatos(json))    //imprimir los datos en la consola
-    .catch(err => console.log('Solicitud fallida', err)); // Capturar errores
+    .then(response => response.json())  
+    .then(json => mostrarDatos(json))    
+    .catch(err => console.log('Solicitud fallida', err)); 
 
     function mostrarDatos(json){
         console.log(json);
@@ -272,6 +274,7 @@ fetch('http://localhost:8080/peluchesmasvendidos')
         
     }   
 } 
+
 //profile
 const perfil = document.getElementById("perfil");
 if(perfil){
@@ -280,51 +283,136 @@ if(perfil){
 
     const url = new URL(`http://localhost:8080/users/${id}/peluches`);
     fetch(url, {
-        method: 'GET', // O 'POST', 'PUT', 'DELETE' dependiendo de la solicitud
+        method: 'GET', 
         headers: {
-            'Authorization': `Bearer ${token}`, // Incluir el token en el encabezado de autorización
-            'Content-Type': 'application/json' // Especificar el tipo de contenido
+            'Authorization': `Bearer ${token}`, 
+            'Content-Type': 'application/json' 
         }
     })
-    .then(response => response.json())  // convertir a json
-    .then(json => mostrarDatos(json))    //imprimir los datos en la consola
-    .catch(err => console.log('Solicitud fallida', err)); // Capturar errores
+    .then(response => response.json())  
+    .then(json => mostrarDatos(json))    
+    .catch(err => console.log('Solicitud fallida', err)); 
 
+
+        
     function mostrarDatos(json){
         console.log(json);
         const extractedAttributes = json.map(item => ({
             animal: item.animal,   
+            id: item.id
         }));
+        
         extractedAttributes.forEach(attr => {
             
             if (attr.animal === 'perro') {
                 const img = document.createElement('img');
                 img.src = './imagenes/perro.webp';
                 img.alt = 'perro';
-                const li = document.createElement('li')
+                const li = document.createElement('li');
                 li.appendChild(img);
-                perfil.appendChild(li)
-            } else if (attr.animal === 'oso') {
+                perfil.appendChild(li);
+                const button = document.createElement('button');
+                button.id = attr.id;
+                button.textContent = 'eliminar';
+                li.appendChild(button)
+                if(button){
+                    document.getElementById(button.id).addEventListener('click', function() {
+                        const url = new URL(`http://localhost:8080/peluches/${button.id}`);
+
+                            fetch(url, {
+                                        method: 'DELETE', 
+                                        headers: {
+                                            'Content-Type': 'application/json' 
+                                        }
+                                        })
+                                        .catch(err => console.log('Solicitud fallida', err)); 
+                                        location.reload();
+
+
+
+                })}}
+            
+            else if (attr.animal === 'oso') {
                 const img = document.createElement('img');
                 img.src = './imagenes/oso.jpeg';
                 img.alt = 'oso';
                 const li = document.createElement('li')
                 li.appendChild(img);
-                perfil.appendChild(li)
+                perfil.appendChild(li);
+                const button = document.createElement('button');
+                button.id = attr.id;
+                button.textContent = 'eliminar';
+                li.appendChild(button)
+                if(button){
+                    document.getElementById(button.id).addEventListener('click', function() {
+                        const url = new URL(`http://localhost:8080/peluches/${button.id}`);
+
+                            fetch(url, {
+                                        method: 'DELETE', 
+                                        headers: {
+                                            'Content-Type': 'application/json' 
+                                        }
+                                        })
+                                        .catch(err => console.log('Solicitud fallida', err)); 
+                                        location.reload();
+
+
+
+                })}
             } else if (attr.animal === 'mapache') {
                 const img = document.createElement('img');
                 img.src = './imagenes/mapache.webp';
                 img.alt = 'mapache';
                 const li = document.createElement('li')
                 li.appendChild(img);
-                perfil.appendChild(li)
+                perfil.appendChild(li);
+                const button = document.createElement('button');
+                button.id = attr.id;
+                button.textContent = 'eliminar';
+                li.appendChild(button)
+                if(button){
+                    document.getElementById(button.id).addEventListener('click', function() {
+                        const url = new URL(`http://localhost:8080/peluches/${button.id}`);
+
+                            fetch(url, {
+                                        method: 'DELETE', 
+                                        headers: {
+                                            'Content-Type': 'application/json' 
+                                        }
+                                        })
+                                        .catch(err => console.log('Solicitud fallida', err)); 
+                                        location.reload();
+
+
+
+                })}
             } else if (attr.animal === 'conejo') {
                 const img = document.createElement('img');
                 img.src = './imagenes/conejo.jpg';
                 img.alt = 'conejo';
                 const li = document.createElement('li')
                 li.appendChild(img);
-                perfil.appendChild(li)
+                perfil.appendChild(li);
+                const button = document.createElement('button');
+                button.id = attr.id;
+                button.textContent = 'eliminar';
+                li.appendChild(button)
+                if(button){
+                    document.getElementById(button.id).addEventListener('click', function() {
+                        const url = new URL(`http://localhost:8080/peluches/${button.id}`);
+
+                            fetch(url, {
+                                        method: 'DELETE', 
+                                        headers: {
+                                            'Content-Type': 'application/json' 
+                                        }
+                                        })
+                                        .catch(err => console.log('Solicitud fallida', err)); 
+                                        location.reload();
+
+
+
+                })}
             }
             else if (attr.animal === 'gato') {
                 const img = document.createElement('img');
@@ -333,6 +421,26 @@ if(perfil){
                 const li = document.createElement('li')
                 li.appendChild(img);
                 perfil.appendChild(li)
+                const button = document.createElement('button');
+                button.id = attr.id;
+                button.textContent = 'eliminar';
+                li.appendChild(button)
+                if(button){
+                    document.getElementById(button.id).addEventListener('click', function() {
+                        const url = new URL(`http://localhost:8080/peluches/${button.id}`);
+
+                            fetch(url, {
+                                        method: 'DELETE', 
+                                        headers: {
+                                            'Content-Type': 'application/json' 
+                                        }
+                                        })
+                                        .catch(err => console.log('Solicitud fallida', err)); 
+                                        location.reload();
+
+
+
+                })}
             }
         });
         

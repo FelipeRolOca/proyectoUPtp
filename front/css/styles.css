@@ -177,6 +177,18 @@ div.mandarinfo button{
 }
 #perfil li{
   list-style-type: none;
+  display: block;
+  width: 300px; 
+  height:  300px;
+}
+#perfil li button{
+  color: white;
+  background-color: #939393;
+  float: left;
+  margin: 10px;
+  font-size: large;
+  border: 6px solid #000000;
+
 }
 #enviarinfo{
   color: white;

@@ -220,7 +220,7 @@ app.put("/peluches/:id",Middleware.verify,async (req,res) =>{
   }catch(error){  
      res.status(500).send("Error");
   } 
-  
+});
   // borrar 
   app.delete("/peluches/:id", async(req,res) =>{
 
@@ -238,7 +238,8 @@ app.put("/peluches/:id",Middleware.verify,async (req,res) =>{
     }
   });
 
-});
+
+
 
 app.get("/peluches",async (req,res) =>{
   
