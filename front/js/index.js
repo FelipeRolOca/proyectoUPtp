@@ -16,10 +16,10 @@ let password = null;
 let email = null;
 let token = null;
 let id = null;
-let idguardado = localStorage.getItem('id');
-let tokenguardado = localStorage.getItem('token');
-
-
+let idguardado;
+let tokenguardado;
+tokenguardado = localStorage.getItem('token');
+idguardado = localStorage.getItem('id');
 
 
 if (enviar){
@@ -48,7 +48,8 @@ if (enviar){
     .then(data => {
         token = data;
         localStorage.setItem('token', token);
-
+        console.log(token);
+        console.log(tokenguardado);
     })
     .catch(error => {
         console.error('Error en la solicitud:', error);
@@ -76,7 +77,7 @@ if (enviar){
         console.error('Error en la solicitud:', error);
     });
 
-
+    //location.reload();
 
 });
 
@@ -190,6 +191,7 @@ document.getElementById('enviarinfo').addEventListener('click', function() {
 
     let id = idguardado;
     let token = tokenguardado;
+    
 
     const url = new URL(`http://localhost:8080/peluches/${id}/create`);
 
@@ -230,6 +232,7 @@ fetch('http://localhost:8080/peluchesmasvendidos')
         console.log(json);
         const extractedAttributes = json.map(item => ({
             animal: item._id.animal,   
+            total: item.total
         }));
         extractedAttributes.forEach(attr => {
             
@@ -237,29 +240,41 @@ fetch('http://localhost:8080/peluchesmasvendidos')
                 const img = document.createElement('img');
                 img.src = './imagenes/perro.webp';
                 img.alt = 'perro';
-                const li = document.createElement('li')
+                const li = document.createElement('li');
+                const p = document.createElement('p');
+                p.textContent = attr.total;
                 li.appendChild(img);
+                li.appendChild(p);
                 contenedor.appendChild(li)
             } else if (attr.animal === 'oso') {
                 const img = document.createElement('img');
                 img.src = './imagenes/oso.jpeg';
                 img.alt = 'oso';
                 const li = document.createElement('li')
+                const p = document.createElement('p');
+                p.textContent = attr.total;
                 li.appendChild(img);
+                li.appendChild(p);
                 contenedor.appendChild(li)
             } else if (attr.animal === 'mapache') {
                 const img = document.createElement('img');
                 img.src = './imagenes/mapache.webp';
                 img.alt = 'mapache';
                 const li = document.createElement('li')
+                const p = document.createElement('p');
+                p.textContent = attr.total;
                 li.appendChild(img);
+                li.appendChild(p);
                 contenedor.appendChild(li)
             } else if (attr.animal === 'conejo') {
                 const img = document.createElement('img');
                 img.src = './imagenes/conejo.jpg';
                 img.alt = 'conejo';
                 const li = document.createElement('li')
+                const p = document.createElement('p');
+                p.textContent = attr.total;
                 li.appendChild(img);
+                li.appendChild(p);
                 contenedor.appendChild(li)
             }
             else if (attr.animal === 'gato') {
@@ -267,7 +282,10 @@ fetch('http://localhost:8080/peluchesmasvendidos')
                 img.src = './imagenes/gato.jpeg';
                 img.alt = 'conejo';
                 const li = document.createElement('li')
+                const p = document.createElement('p');
+                p.textContent = attr.total;
                 li.appendChild(img);
+                li.appendChild(p);
                 contenedor.appendChild(li)
             }
         });
@@ -280,7 +298,6 @@ const perfil = document.getElementById("perfil");
 if(perfil){
     let id = idguardado;
     let token = tokenguardado;
-
     const url = new URL(`http://localhost:8080/users/${id}/peluches`);
     fetch(url, {
         method: 'GET', 

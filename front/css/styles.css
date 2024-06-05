@@ -199,3 +199,12 @@ div.mandarinfo button{
   border: 6px solid #000000;
   visibility: hidden;
 }
+#contenedor li p{
+  color: white;
+  background-color: #939393;
+  float: left;
+  margin: 10px;
+  font-size: large;
+  border: 6px solid #000000;
+
+}
