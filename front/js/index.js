@@ -18,8 +18,8 @@ let token = null;
 let id = null;
 let idguardado;
 let tokenguardado;
-tokenguardado = localStorage.getItem('token');
-idguardado = localStorage.getItem('id');
+tokenguardado = localStorage.getItem("token");
+idguardado = localStorage.getItem("id");
 
 
 if (enviar){
@@ -47,7 +47,7 @@ if (enviar){
     })
     .then(data => {
         token = data;
-        localStorage.setItem('token', token);
+        localStorage.setItem("token",token);
         console.log(token);
         console.log(tokenguardado);
     })
@@ -70,18 +70,18 @@ if (enviar){
     .then(data => {
        
        id = data.id;
-       localStorage.setItem('id', id);
+       localStorage.setItem("id", id);
 
     })
     .catch(error => {
         console.error('Error en la solicitud:', error);
     });
 
-    location.reload();
+    //location.reload();
 
 });
 
-}  
+}
 
 
     
@@ -213,7 +213,7 @@ document.getElementById('enviarinfo').addEventListener('click', function() {
         console.log(data);
 
     })
-    location.reload();
+    //location.reload();
 });
 
 }
@@ -298,6 +298,7 @@ const perfil = document.getElementById("perfil");
 if(perfil){
     let id = idguardado;
     let token = tokenguardado;
+    console.log(token);
     const url = new URL(`http://localhost:8080/users/${id}/peluches`);
     fetch(url, {
         method: 'GET', 
@@ -308,7 +309,7 @@ if(perfil){
     })
     .then(response => response.json())  
     .then(json => mostrarDatos(json))    
-    .catch(err => console.log('Solicitud fallida', err)); 
+
 
 
         
