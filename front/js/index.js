@@ -49,7 +49,8 @@ if (enviar){
         token = data;
         localStorage.setItem("token",token);
         console.log(token);
-        console.log(tokenguardado);
+        tokenguardado = localStorage.getItem("token");
+        
     })
     .catch(error => {
         console.error('Error en la solicitud:', error);
@@ -71,18 +72,18 @@ if (enviar){
        
        id = data.id;
        localStorage.setItem("id", id);
+       console.log(tokenguardado);
 
     })
     .catch(error => {
         console.error('Error en la solicitud:', error);
     });
 
-    location.reload();
 
 });
 
 }
-tokenguardado = localStorage.getItem("token");
+
 idguardado = localStorage.getItem("id");
 
     
