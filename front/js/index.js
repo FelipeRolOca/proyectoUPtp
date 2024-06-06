@@ -82,7 +82,8 @@ if (enviar){
 });
 
 }
-
+tokenguardado = localStorage.getItem("token");
+idguardado = localStorage.getItem("id");
 
     
    
@@ -213,7 +214,7 @@ document.getElementById('enviarinfo').addEventListener('click', function() {
         console.log(data);
 
     })
-    //location.reload();
+    location.reload();
 });
 
 }
@@ -298,7 +299,6 @@ const perfil = document.getElementById("perfil");
 if(perfil){
     let id = idguardado;
     let token = tokenguardado;
-    console.log(token);
     const url = new URL(`http://localhost:8080/users/${id}/peluches`);
     fetch(url, {
         method: 'GET', 
@@ -308,7 +308,17 @@ if(perfil){
         }
     })
     .then(response => response.json())  
-    .then(json => mostrarDatos(json))    
+    .then(json => mostrarDatos(json))  
+    .catch(error => {
+        console.error('Error recibido:', error.message);
+        if(error){
+            const p = document.createElement('p');
+            p.textContent = "no ha inciado sesion correctamente";
+            perfil.appendChild(p)
+          }
+      });
+      
+
 
 
 
@@ -343,7 +353,9 @@ if(perfil){
                                             'Content-Type': 'application/json' 
                                         }
                                         })
-                                        .catch(err => console.log('Solicitud fallida', err)); 
+                                        .catch(error => {
+                                            console.error('Error recibido:', error.message);
+                                          });
                                         location.reload();
 
 
