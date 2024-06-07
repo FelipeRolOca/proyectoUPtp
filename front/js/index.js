@@ -72,19 +72,24 @@ if (enviar){
        
        id = data.id;
        localStorage.setItem("id", id);
+       idguardado = localStorage.getItem("id");
        console.log(tokenguardado);
+       console.log(id);
+       console.log(idguardado)
+       location.reload();
 
     })
     .catch(error => {
         console.error('Error en la solicitud:', error);
     });
+    
 
 
 });
 
 }
 
-idguardado = localStorage.getItem("id");
+
 
     
    
