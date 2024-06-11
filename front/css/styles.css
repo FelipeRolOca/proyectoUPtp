@@ -163,6 +163,7 @@ div.mandarinfo button{
 }
 #contenedor li{
   list-style-type: none;
+  text-align: center;
 }
 
 #perfil li img{
@@ -204,7 +205,9 @@ div.mandarinfo button{
   background-color: #939393;
   float: left;
   margin: 10px;
+  width: 2%;
   font-size: large;
+  
   border: 6px solid #000000;
 
 }
